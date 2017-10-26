@@ -1,3 +1,4 @@
+<link rel="import" href="../paper-checkbox/paper-checkbox.html">
 <link rel="import" href="../paper-input/paper-input.html">
 <link rel="import" href="../polymer/polymer.html">
 <!--
@@ -24,11 +25,12 @@
         <th>Weight</th>
         <th>Rest</th>
       </tr>
-      <template is="dom-repeat" items="{{sets}}">
+      <template is="dom-repeat" items="{{sets}}" sort="byDone" observe="done">
       <tr>  
         <td><paper-input type="number" value="{{item.reps}}"><span suffix>times</span></paper-input></td>
         <td><paper-input type="number" value="{{item.weight}}"><span suffix>Kilograms</span></paper-input></td>
         <td><paper-input type="number" value="{{item.rest}}"><span suffix>Seconds to rest</span></paper-input></td>
+        <td><paper-checkbox checked="{{item.done}}"></paper-checkbox></td>
       </tr>
       </template>
     
@@ -62,6 +64,9 @@
         }
       }
       this.sets = sets 
+    },
+    byDone: function() {
+      
     },
   })
 </script>
