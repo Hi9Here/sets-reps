@@ -26,14 +26,13 @@
         <th>Rest</th>
       </tr>
       <template is="dom-repeat" items="{{sets}}" sort="byDone" observe="done">
-      <tr>  
-        <td><paper-input type="number" value="{{item.reps}}"><span suffix>times</span></paper-input></td>
-        <td><paper-input type="number" value="{{item.weight}}"><span suffix>Kilograms</span></paper-input></td>
-        <td><paper-input type="number" value="{{item.rest}}"><span suffix>Seconds to rest</span></paper-input></td>
-        <td><paper-checkbox checked="{{item.done}}"></paper-checkbox></td>
-      </tr>
+        <tr>  
+          <td><paper-input type="number" value="{{item.reps}}"><span suffix>times</span></paper-input></td>
+          <td><paper-input type="number" value="{{item.weight}}"><span suffix>Kilograms</span></paper-input></td>
+          <td><paper-input type="number" value="{{item.rest}}"><span suffix>Seconds to rest</span></paper-input></td>
+          <td><paper-checkbox checked="{{item.done}}"></paper-checkbox></td>
+        </tr>
       </template>
-    
     </table>
   </template>
 </dom-module>
@@ -65,8 +64,8 @@
       }
       this.sets = sets 
     },
-    byDone: function() {
-      
+    byDone: function(a,b) {
+      return a.done > b.done
     },
   })
 </script>
