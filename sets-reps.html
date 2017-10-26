@@ -1,0 +1,67 @@
+<link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../polymer/polymer.html">
+<!--
+  `<sets-reps></sets-reps>` sets-reps
+  @demo demo.html
+-->
+<dom-module id="sets-reps">
+  <template>
+    <style>
+      :host {display:block;}
+      table {text-align:center}
+      td {
+        padding:10px
+      }
+      table paper-input {
+        max-width:160px;
+      }
+    </style>
+    <paper-input auto-Validate label="Workout" pattern="[[pattern]]" value="{{value}}" error="try 3 of 12 at 50 and 60">
+    </paper-input>
+    <table>
+      <tr>
+        <th>Repetitions</th> 
+        <th>Weight</th>
+        <th>Rest</th>
+      </tr>
+      <template is="dom-repeat" items="{{sets}}">
+      <tr>  
+        <td><paper-input type="number" value="{{item.reps}}"><span suffix>times</span></paper-input></td>
+        <td><paper-input type="number" value="{{item.weight}}"><span suffix>Kilograms</span></paper-input></td>
+        <td><paper-input type="number" value="{{item.rest}}"><span suffix>Seconds to rest</span></paper-input></td>
+      </tr>
+      </template>
+    
+    </table>
+  </template>
+</dom-module>
+<script>
+  Polymer({
+    is: "sets-reps",
+    properties:{
+      pattern:{
+        type:String,
+        value:"^([\\d]+) (?:set(?:s)? )?of ([\\d]+)(?:(?: repetition| rep)?(?:s)?)? at ([\\d]+)(?:(?: )?(?:kilo|Kilogram|kg)(?:s)?)?(?: with| and) ([\\d]+)(?: second(?:s)?)?(?: rest(?:s)?)?",
+      },
+      value:{
+        value:"3 sets of 12 repetitions at 50 kilos and 60 seconds rest",
+        observer:"setTable",
+      },
+    },
+    setTable: function(line){
+      var regex = new RegExp(this.pattern, "i")
+      var match
+      var sets = []
+      if ((match = regex.exec(line)) !== null) {
+        for (i = 0; i < +match[1]; i++) { //sets
+          sets.push({
+            reps:   +match[2],
+            weight: +match[3],
+            rest:   +match[4],
+          })
+        }
+      }
+      this.sets = sets 
+    },
+  })
+</script>
