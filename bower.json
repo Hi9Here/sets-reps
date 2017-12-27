@@ -8,7 +8,7 @@
     "web-components"
   ],
   "dependencies": {
-    "polymer": "Polymer/polymer#~1.9.3",
+    "polymer": "Polymer/polymer#^1.11.2",
     "paper-input": "PolymerElements/paper-input#~1.1.24",
     "paper-checkbox": "PolymerElements/paper-checkbox#~1.4.2"
   },
